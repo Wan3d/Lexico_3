@@ -1,0 +1,14 @@
+C:\Users\zullo\OneDrive\Escritorio\IV - Semestre\Lenguajes y Automatas\UIV\Lexico_3\bin\Debug\net8.0\Lexico_3.exe
+C:\Users\zullo\OneDrive\Escritorio\IV - Semestre\Lenguajes y Automatas\UIV\Lexico_3\bin\Debug\net8.0\Lexico_3.deps.json
+C:\Users\zullo\OneDrive\Escritorio\IV - Semestre\Lenguajes y Automatas\UIV\Lexico_3\bin\Debug\net8.0\Lexico_3.runtimeconfig.json
+C:\Users\zullo\OneDrive\Escritorio\IV - Semestre\Lenguajes y Automatas\UIV\Lexico_3\bin\Debug\net8.0\Lexico_3.dll
+C:\Users\zullo\OneDrive\Escritorio\IV - Semestre\Lenguajes y Automatas\UIV\Lexico_3\bin\Debug\net8.0\Lexico_3.pdb
+C:\Users\zullo\OneDrive\Escritorio\IV - Semestre\Lenguajes y Automatas\UIV\Lexico_3\obj\Debug\net8.0\Lexico_3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\zullo\OneDrive\Escritorio\IV - Semestre\Lenguajes y Automatas\UIV\Lexico_3\obj\Debug\net8.0\Lexico_3.AssemblyInfoInputs.cache
+C:\Users\zullo\OneDrive\Escritorio\IV - Semestre\Lenguajes y Automatas\UIV\Lexico_3\obj\Debug\net8.0\Lexico_3.AssemblyInfo.cs
+C:\Users\zullo\OneDrive\Escritorio\IV - Semestre\Lenguajes y Automatas\UIV\Lexico_3\obj\Debug\net8.0\Lexico_3.csproj.CoreCompileInputs.cache
+C:\Users\zullo\OneDrive\Escritorio\IV - Semestre\Lenguajes y Automatas\UIV\Lexico_3\obj\Debug\net8.0\Lexico_3.dll
+C:\Users\zullo\OneDrive\Escritorio\IV - Semestre\Lenguajes y Automatas\UIV\Lexico_3\obj\Debug\net8.0\refint\Lexico_3.dll
+C:\Users\zullo\OneDrive\Escritorio\IV - Semestre\Lenguajes y Automatas\UIV\Lexico_3\obj\Debug\net8.0\Lexico_3.pdb
+C:\Users\zullo\OneDrive\Escritorio\IV - Semestre\Lenguajes y Automatas\UIV\Lexico_3\obj\Debug\net8.0\Lexico_3.genruntimeconfig.cache
+C:\Users\zullo\OneDrive\Escritorio\IV - Semestre\Lenguajes y Automatas\UIV\Lexico_3\obj\Debug\net8.0\ref\Lexico_3.dll
