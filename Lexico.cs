@@ -22,7 +22,7 @@ namespace Lexico_3
         const int E = -2;
 
         int[,] TRAND = {
-            {0,1,1,33,1,12,14,8,9,10,11,23,16,16,18,20,21,26,25,27,29,32,34,0,F,33},
+            {0,1,2,33,1,12,14,8,9,10,11,23,16,16,18,20,21,26,25,27,29,32,34,0,F,33},
             {F,1,1,F,1,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F},
             {F,F,2,3,5,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F},
             {E,E,4,E,E,E,E,E,E,E,E,E,E,E,E,E,E,E,E,E,E,E,E,E,E,E},
@@ -123,7 +123,7 @@ namespace Lexico_3
             {
                 return 4;
             }
-            else if (char.IsLetter(c))
+            else if (char.IsLetterOrDigit(c))
             {
                 return 1;
             }
@@ -131,7 +131,90 @@ namespace Lexico_3
             {
                 return 2;
             }
-            return 25;
+            else if (c == '.')
+            {
+                return 3;
+            }
+            else if (c == '+')
+            {
+                return 5;
+            }
+            else if (c == '-')
+            {
+                return 6;
+            }
+            else if (c == ';')
+            {
+                return 7;
+            }
+            else if (c == '{')
+            {
+                return 8;
+            }
+            else if (c == '}')
+            {
+                return 9;
+            }
+            else if (c == '?')
+            {
+                return 10;
+            }
+            else if (c == '=')
+            {
+                return 11;
+            }
+            else if (c == '*')
+            {
+                return 12;
+            }
+            else if (c == '%')
+            {
+                return 13;
+            }
+            else if (c == '&')
+            {
+                return 14;
+            }
+            else if (c == '|')
+            {
+                return 15;
+            }
+            else if (c == '!')
+            {
+                return 16;
+            }
+            else if (c == '<')
+            {
+                return 17;
+            }
+            else if (c == '>')
+            {
+                return 18;
+            }
+            else if (c == '"')
+            {
+                return 19;
+            }
+            else if (c == '\'')
+            {
+                return 20;
+            }
+            else if (c == '#')
+            {
+                return 21;
+            }
+            else if (c == '/')
+            {
+                return 22;
+            }
+            else if (c == '\n')
+            {
+                return 23;
+            }
+            else
+            {
+                return 25;
+            }
         }
         private void Clasifica(int estado)
         {
@@ -167,74 +250,73 @@ namespace Lexico_3
                 case 28: setClasificacion(Tipos.Cadena); break;
                 case 29:
                 case 30:
-                case 31: 
+                case 31:
                 case 32:
                 case 33: setClasificacion(Tipos.Caracter); break;
-                case 34: 
+                case 34:
+                case 35:
+                case 36:
+                case 37: setClasificacion(Tipos.OperadorFactor); break;
             }
         }
-    }
-}
-public void nextToken()
-{
-    char c;
-    string buffer = "";
-    int estado = 0;
-    while (estado >= 0)
-    {
-        c = (char)archivo.Peek();
-        estado = TRAND[estado, Columna(c)];
-        Clasifica(estado);
-        if (estado >= 0)
+        public void nextToken()
         {
-            archivo.Read();
-            if (c == '\n')
+            char c;
+            string buffer = "";
+            int estado = 0;
+            while (estado >= 0)
             {
-                linea++;
+                c = (char)archivo.Peek();
+                estado = TRAND[estado, Columna(c)];
+                Clasifica(estado);
+                if (estado >= 0)
+                {
+                    archivo.Read();
+                    if (c == '\n')
+                    {
+                        linea++;
+                    }
+                    if (estado > 0)
+                    {
+                        buffer += c;
+                    }
+                    else
+                    {
+                        buffer = "";
+                    }
+                }
             }
-            if (estado > 0)
+            if (estado == E)
             {
-                buffer += c;
+                if (getClasificacion() == Tipos.Cadena)
+                {
+                    throw new Error("léxico, se esperaba un cierre de cadena", log, linea);
+                }
+                else if (getClasificacion() == Tipos.Caracter)
+                {
+                    throw new Error("léxico, se esperaba un cierre de comilla simple", log, linea);
+                }
+                else if (getClasificacion() == Tipos.Numero)
+                {
+                    throw new Error("léxico, se esperaba un dígitos", log, linea);
+                }
+                else
+                {
+                    throw new Error("léxico, se espera fin de comentario", log, linea);
+                }
             }
-            else
+            if (!finArchivo())
             {
-                buffer = "";
+                setContenido(buffer);
+                log.WriteLine(getContenido() + " = " + getClasificacion());
             }
         }
-    }
-    if (estado == E)
-    {
-        if (getClasificacion() == Tipos.Cadena)
+        public bool finArchivo()
         {
-            throw new Error("léxico, se esperaba un cierre de cadena", log, linea);
+            return archivo.EndOfStream;
         }
-        else if (getClasificacion() == Tipos.Caracter)
-        {
-            throw new Error("léxico, se esperaba un cierre de comilla simple", log, linea);
-        }
-        else if (getClasificacion() == Tipos.Numero)
-        {
-            throw new Error("léxico, se esperaba un dígitos", log, linea);
-        }
-        else
-        {
-            throw new Error("léxico, se espera fin de comentario", log, linea);
-        }
-    }
-    if (!finArchivo())
-    {
-        setContenido(buffer);
-        log.WriteLine(getContenido() + " = " + getClasificacion());
     }
 }
-public bool finArchivo()
-{
-    return archivo.EndOfStream;
-}
-
-    }
-}
-
 /*
 
 Expresión Regular: Método Formal que a través de una secuencia de caracteres que define un PATRÓN de búsqueda

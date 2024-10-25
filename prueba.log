@@ -1,9 +1,64 @@
+# = Caracter
+include = Identificador
+< = OperadorRelacional
+stdio = Identificador
+> = OperadorRelacional
+{ = InicioBloque
 230 = Identificador
+230e = Identificador
+- = OperadorTermino
+30 = Identificador
+230e = Identificador
++ = OperadorTermino
+30 = Identificador
+230 = Identificador
+. = Caracter
+30e30 = Identificador
+230 = Identificador
+. = Caracter
+30e = Identificador
+- = OperadorTermino
+30 = Identificador
+230 = Identificador
+. = Caracter
+30e = Identificador
++ = OperadorTermino
+30 = Identificador
+"hola mundo" = Cadena
+# = Caracter
+64 = Identificador
+- = OperadorTermino
+'@' = Caracter
 radio = Identificador
-monodnds = Identificador
-dksakdaj = Identificador
-hola = Identificador
+; = FinSentencia
+< = OperadorRelacional
+<> = OperadorRelacional
+> = OperadorRelacional
+! = OperadorLogico
+!= = OperadorRelacional
+== = OperadorRelacional
+= = Asignacion
+; = FinSentencia
+&& = OperadorLogico
+& = Caracter
+|| = OperadorLogico
+| = Caracter
+++ = IncrementoTermino
++ = OperadorTermino
+-- = IncrementoTermino
+- = OperadorTermino
++= = IncrementoTermino
+-= = IncrementoTermino
+* = OperadorFactor
+*= = IncrementoFactor
+/= = IncrementoFactor
+% = OperadorFactor
+%= = IncrementoFactor
+"" = Cadena
+' ' = Caracter
+; = FinSentencia
+} = FinBloque
 
 -----------------------------------
 
-Líneas del archivo: 13
+Líneas del archivo: 19
