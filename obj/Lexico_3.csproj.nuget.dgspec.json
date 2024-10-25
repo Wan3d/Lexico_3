@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\zullo\\OneDrive\\Escritorio\\IV - Semestre\\Lenguajes y Automatas\\UIV\\Lexico_3\\Lexico_3.csproj": {}
+    "C:\\Users\\zullo\\OneDrive\\Escritorio\\IV - Semestre\\Lenguajes y Automatas I\\UIV\\Lexico_3\\Lexico_3.csproj": {}
   },
   "projects": {
-    "C:\\Users\\zullo\\OneDrive\\Escritorio\\IV - Semestre\\Lenguajes y Automatas\\UIV\\Lexico_3\\Lexico_3.csproj": {
+    "C:\\Users\\zullo\\OneDrive\\Escritorio\\IV - Semestre\\Lenguajes y Automatas I\\UIV\\Lexico_3\\Lexico_3.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\zullo\\OneDrive\\Escritorio\\IV - Semestre\\Lenguajes y Automatas\\UIV\\Lexico_3\\Lexico_3.csproj",
+        "projectUniqueName": "C:\\Users\\zullo\\OneDrive\\Escritorio\\IV - Semestre\\Lenguajes y Automatas I\\UIV\\Lexico_3\\Lexico_3.csproj",
         "projectName": "Lexico_3",
-        "projectPath": "C:\\Users\\zullo\\OneDrive\\Escritorio\\IV - Semestre\\Lenguajes y Automatas\\UIV\\Lexico_3\\Lexico_3.csproj",
+        "projectPath": "C:\\Users\\zullo\\OneDrive\\Escritorio\\IV - Semestre\\Lenguajes y Automatas I\\UIV\\Lexico_3\\Lexico_3.csproj",
         "packagesPath": "C:\\Users\\zullo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\zullo\\OneDrive\\Escritorio\\IV - Semestre\\Lenguajes y Automatas\\UIV\\Lexico_3\\obj\\",
+        "outputPath": "C:\\Users\\zullo\\OneDrive\\Escritorio\\IV - Semestre\\Lenguajes y Automatas I\\UIV\\Lexico_3\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\zullo\\AppData\\Roaming\\NuGet\\NuGet.Config"

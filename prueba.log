@@ -1,8 +1,9 @@
-{ = Caracter
-230 = Numero
-+ = Caracter
+230 = Identificador
 radio = Identificador
+monodnds = Identificador
+dksakdaj = Identificador
+hola = Identificador
 
 -----------------------------------
 
-Líneas del archivo: 5
+Líneas del archivo: 13
