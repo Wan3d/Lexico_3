@@ -123,7 +123,7 @@ namespace Lexico_3
             {
                 return 4;
             }
-            else if (char.IsLetterOrDigit(c))
+            else if (char.IsLetter(c))
             {
                 return 1;
             }
