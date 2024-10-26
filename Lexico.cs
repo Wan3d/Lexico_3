@@ -298,7 +298,7 @@ namespace Lexico_3
                 }
                 else if (getClasificacion() == Tipos.Numero)
                 {
-                    throw new Error("léxico, se esperaba un dígitos", log, linea);
+                    throw new Error("léxico, se esperaba un dígito", log, linea);
                 }
                 else
                 {
