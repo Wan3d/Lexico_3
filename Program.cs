@@ -9,6 +9,7 @@ namespace Lexico_3
     {
         static void Main(string[] args)
         {
+            bool bandera = true;
             try
             {
                 using (Lexico lexico = new Lexico())

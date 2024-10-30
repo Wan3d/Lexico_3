@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,15 +6,23 @@ using System.IO;
 using System.Linq.Expressions;
 using System.Security.Cryptography;
 using System.Runtime.InteropServices;
+using OfficeOpenXml;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Lexico_3
 {
     public class Lexico : Token, IDisposable
     {
+
         public StreamReader archivo;
         public StreamWriter log;
         public StreamWriter asm;
         public int linea = 1;
+
+        string rutaArchivo = "C:/Users/zullo/OneDrive/Escritorio/IV - Semestre/Lenguajes y Automatas I/UIV/Lexico_3/TRAND3.xlsx";
+
+
+        // Boolean bandera = false; // SI V = MATRIZ, SI F = EXCEL
 
         const int F = -1;
 
@@ -61,6 +68,38 @@ namespace Lexico_3
             {36,36,36,36,36,36,36,36,36,36,36,36,37,36,36,36,36,36,36,36,36,36,36,36,E,36},
             {36,36,36,36,36,36,36,36,36,36,36,36,37,36,36,36,36,36,36,36,36,36,0,36,E,36},
         };
+
+        public void LeerExcel(string rutaArchivo)
+        {
+            // Asegurarse de que EPPlus permita la licencia no comercial
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            // Verificar si el archivo existe
+            if (!File.Exists(rutaArchivo))
+            {
+                Console.WriteLine("El archivo no existe.");
+                return;
+            }
+
+            // Abrir y leer el archivo Excel
+            using (var package = new ExcelPackage(new FileInfo(rutaArchivo)))
+            {
+                var worksheet = package.Workbook.Worksheets[0]; // Selecciona la primera hoja
+                int filas = worksheet.Dimension.Rows;
+                int columnas = worksheet.Dimension.Columns;
+
+                // Recorrer las filas y columnas
+                for (int fila = 1; fila <= filas; fila++)
+                {
+                    for (int columna = 1; columna <= columnas; columna++)
+                    {
+                        var celda = worksheet.Cells[fila, columna].Text;
+                        Console.Write(celda + "\t");
+                    }
+                    Console.WriteLine();
+                }
+            }
+        }
         public Lexico()
         {
             log = new StreamWriter("prueba.log");
@@ -259,6 +298,7 @@ namespace Lexico_3
                 case 37: setClasificacion(Tipos.OperadorFactor); break;
             }
         }
+
         public void nextToken()
         {
             char c;
