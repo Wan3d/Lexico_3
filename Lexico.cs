@@ -6,8 +6,12 @@ using System.IO;
 using System.Linq.Expressions;
 using System.Security.Cryptography;
 using System.Runtime.InteropServices;
-using OfficeOpenXml;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Common;
+using System.IO.Compression;
+using Microsoft.VisualBasic;
+using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml;
 
 namespace Lexico_3
 {
@@ -19,11 +23,9 @@ namespace Lexico_3
         public StreamWriter asm;
         public int linea = 1;
 
-        string rutaArchivo = "C:/Users/zullo/OneDrive/Escritorio/IV - Semestre/Lenguajes y Automatas I/UIV/Lexico_3/TRAND3.xlsx";
-
-
-        // Boolean bandera = false; // SI V = MATRIZ, SI F = EXCEL
-
+        XLWorkbook workbook;
+        IXLWorksheet worksheet;
+        // string rutaArchivo = "C:/Users/zullo/OneDrive/Escritorio/IV - Semestre/Lenguajes y Automatas I/UIV/Lexico_3/TRAND3.xlsx";
         const int F = -1;
 
         const int E = -2;
@@ -69,39 +71,11 @@ namespace Lexico_3
             {36,36,36,36,36,36,36,36,36,36,36,36,37,36,36,36,36,36,36,36,36,36,0,36,E,36},
         };
 
-        public void LeerExcel(string rutaArchivo)
-        {
-            // Asegurarse de que EPPlus permita la licencia no comercial
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-
-            // Verificar si el archivo existe
-            if (!File.Exists(rutaArchivo))
-            {
-                Console.WriteLine("El archivo no existe.");
-                return;
-            }
-
-            // Abrir y leer el archivo Excel
-            using (var package = new ExcelPackage(new FileInfo(rutaArchivo)))
-            {
-                var worksheet = package.Workbook.Worksheets[0]; // Selecciona la primera hoja
-                int filas = worksheet.Dimension.Rows;
-                int columnas = worksheet.Dimension.Columns;
-
-                // Recorrer las filas y columnas
-                for (int fila = 1; fila <= filas; fila++)
-                {
-                    for (int columna = 1; columna <= columnas; columna++)
-                    {
-                        var celda = worksheet.Cells[fila, columna].Text;
-                        Console.Write(celda + "\t");
-                    }
-                    Console.WriteLine();
-                }
-            }
-        }
         public Lexico()
         {
+            workbook = new XLWorkbook("TRAND3.xlsx");
+            worksheet = workbook.Worksheet(1);
+
             log = new StreamWriter("prueba.log");
             asm = new StreamWriter("prueba.asm");
             log.AutoFlush = true;
@@ -118,6 +92,8 @@ namespace Lexico_3
 
         public Lexico(string nombreArchivo)
         {
+            workbook = new XLWorkbook("TRAND3.xlsx");
+            worksheet = workbook.Worksheet(1);
             string nombreArchivoWithoutExt = Path.GetFileNameWithoutExtension(nombreArchivo);   /* Obtenemos el nombre del archivo sin la extensión para poder crear el .log y .asm */
             if (File.Exists(nombreArchivo))
             {
@@ -298,8 +274,26 @@ namespace Lexico_3
                 case 37: setClasificacion(Tipos.OperadorFactor); break;
             }
         }
+        private int obtenerEstadoDesdeExcel(int estadoActual, char c)
+        {
+            IXLCell cell = worksheet.Cell(estadoActual + 1, Columna(c) + 1); // Ajusta para obtener la celda correspondiente
+            string nuevoValor = cell.GetValue<string>();
 
-        public void nextToken()
+            if (nuevoValor == "F")
+            {
+                return F;
+            }
+            else if (nuevoValor == "E")
+            {
+                return E;
+            }
+            else
+            {
+                return int.Parse(nuevoValor);
+            }
+        }
+
+        public void nextToken(bool usarMatriz)
         {
             char c;
             string buffer = "";
@@ -307,7 +301,14 @@ namespace Lexico_3
             while (estado >= 0)
             {
                 c = (char)archivo.Peek();
-                estado = TRAND[estado, Columna(c)];
+                if (usarMatriz)
+                {
+                    estado = TRAND[estado, Columna(c)];
+                }
+                else
+                {
+                    estado = obtenerEstadoDesdeExcel(estado, c);
+                }
                 Clasifica(estado);
                 if (estado >= 0)
                 {

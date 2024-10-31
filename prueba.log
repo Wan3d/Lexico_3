@@ -1,0 +1,33 @@
+# = Caracter
+include = Identificador
+< = OperadorRelacional
+stdio = Identificador
+> = OperadorRelacional
+{ = InicioBloque
+230 = Numero
+230e-30 = Numero
+230e+30 = Numero
+230.30e30 = Numero
+230.30e-30 = Numero
+230.30e+30 = Numero
+"hola mundo" = Cadena
+#64 = Caracter
+- = OperadorTermino
+'@' = Caracter
+" " = Cadena
+' ' = Caracter
+; = FinSentencia
+} = FinBloque
+} = FinBloque
+ads = Identificador
++ = OperadorTermino
+. = Caracter
+= = Asignacion
+/ = OperadorFactor
++ = OperadorTermino
+- = OperadorTermino
+-- = IncrementoTermino
+
+-----------------------------------
+
+Líneas del archivo: 24

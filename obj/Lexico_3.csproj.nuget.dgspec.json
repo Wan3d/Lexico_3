@@ -43,9 +43,21 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Aspose.Cells": {
+              "target": "Package",
+              "version": "[24.10.0, )"
+            },
+            "ClosedXML": {
+              "target": "Package",
+              "version": "[0.104.1, )"
+            },
             "EPPlus": {
               "target": "Package",
               "version": "[7.4.2, )"
+            },
+            "ExcelDataReader": {
+              "target": "Package",
+              "version": "[3.7.0, )"
             }
           },
           "imports": [

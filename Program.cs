@@ -9,14 +9,14 @@ namespace Lexico_3
     {
         static void Main(string[] args)
         {
-            bool bandera = true;
+            bool bandera = false;
             try
             {
-                using (Lexico lexico = new Lexico())
+                using (Lexico lexico = new Lexico("prueba.cpp"))
                 {
                     while (!lexico.finArchivo())
                     {
-                        lexico.nextToken();
+                        lexico.nextToken(bandera);
                     }
                     lexico.log.WriteLine("\n-----------------------------------\n");
                     lexico.log.WriteLine("Líneas del archivo: " + lexico.linea);
