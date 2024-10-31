@@ -73,9 +73,6 @@ namespace Lexico_3
 
         public Lexico()
         {
-            workbook = new XLWorkbook("TRAND3.xlsx");
-            worksheet = workbook.Worksheet(1);
-
             log = new StreamWriter("prueba.log");
             asm = new StreamWriter("prueba.asm");
             log.AutoFlush = true;
@@ -88,12 +85,12 @@ namespace Lexico_3
             {
                 throw new Error("El archivo prueba.cpp no existe", log);
             }
+            workbook = new XLWorkbook("TRAND3.xlsx");
+            worksheet = workbook.Worksheet(1);
         }
 
         public Lexico(string nombreArchivo)
         {
-            workbook = new XLWorkbook("TRAND3.xlsx");
-            worksheet = workbook.Worksheet(1);
             string nombreArchivoWithoutExt = Path.GetFileNameWithoutExtension(nombreArchivo);   /* Obtenemos el nombre del archivo sin la extensión para poder crear el .log y .asm */
             if (File.Exists(nombreArchivo))
             {
@@ -111,12 +108,15 @@ namespace Lexico_3
             {
                 throw new FileNotFoundException("La extensión " + Path.GetExtension(nombreArchivo) + " no existe");    /* Defino una excepción que indica que existe un error con el archivo en caso de no ser encontrado */
             }
+            workbook = new XLWorkbook("TRAND3.xlsx");
+            worksheet = workbook.Worksheet(1);
         }
         public void Dispose()
         {
             archivo.Close();
             log.Close();
             asm.Close();
+            workbook.Dispose(); // Limpiar recursos del lector EXCEL
         }
 
         private int Columna(char c)
@@ -276,21 +276,14 @@ namespace Lexico_3
         }
         private int obtenerEstadoDesdeExcel(int estadoActual, char c)
         {
-            IXLCell cell = worksheet.Cell(estadoActual + 1, Columna(c) + 1); // Ajusta para obtener la celda correspondiente
-            string nuevoValor = cell.GetValue<string>();
-
-            if (nuevoValor == "F")
-            {
-                return F;
-            }
-            else if (nuevoValor == "E")
-            {
-                return E;
-            }
-            else
-            {
-                return int.Parse(nuevoValor);
-            }
+            int fila = estadoActual + 1;
+            int columna = Columna(c) + 1;
+            // A ambos se les suma 1 para que inicien en la fila/columna correspondiente de Excel, ya que empieza desde 0 en Excel
+            IXLCell cell = worksheet.Cell(fila, columna); // Obtiene la celda correspondiente
+            string nuevoValor = cell.GetValue<string>(); // Lee el valor como una cadena para poder compararlo
+            if (nuevoValor == "F") return F;
+            else if (nuevoValor == "E") return E;
+            return int.Parse(nuevoValor);
         }
 
         public void nextToken(bool usarMatriz)
